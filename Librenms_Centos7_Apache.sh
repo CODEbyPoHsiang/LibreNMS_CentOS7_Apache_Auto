@@ -1,5 +1,6 @@
 #Centos 7 + Apache + MySQL(5.7) install Librenms
 
+function install {
 #取得 ip
 ip=`ip addr | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
 
@@ -133,3 +134,19 @@ sudo chmod -R ug=rwX /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstra
 #clear
 echo "安裝完成"
 echo "請開啟網址: http://"$ip"/install/checks 請開啟網頁繼續其它設定"
+}
+
+echo
+echo
+echo ' ### LibreNMS 快速安裝 ###'
+echo
+echo '這個程式將會協助您快速安裝librenms於Centos系統上'
+echo
+echo 'Note:要運行此程式，只能在乾淨的系統上運行'
+read -p '您要繼續運行此程式嗎? [y/n]: ' answer
+if [ "$answer" != 'y' ] && [ "$answer" != 'Y'  ]; then
+    echo 'Goodbye'
+    exit 1
+fi
+
+install
